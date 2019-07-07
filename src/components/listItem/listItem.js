@@ -22,7 +22,7 @@ const ListItemData = props => {
                 List alias of link
             </Typography>
             <IconButton edge="end" aria-label="Add">
-                <AddIcon/>
+                <AddIcon onClick={props.addRow}/>
             </IconButton>
             <div>
                 <List>

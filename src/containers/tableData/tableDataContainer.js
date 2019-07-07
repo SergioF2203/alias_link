@@ -1,10 +1,13 @@
 import React from 'react';
-import LIstItem from '../../components/listItem';
+import ListItem from '../../components/listItem';
+import NewRow from '../../components/newRow';
+import {Grid} from "@material-ui/core";
 
 
 export default class TableDataContainer extends React.Component {
 
     state = {
+        addRow: true,
         data: [
             {
                 alias: "goo",
@@ -22,9 +25,27 @@ export default class TableDataContainer extends React.Component {
 
     };
 
+    handleAddRow = () => {
+        this.setState({addRow: false})
+
+    };
+
+    handleCloseAddRow = () => {
+        this.setState({addRow: true})
+    }
+
     render() {
         return (
-            <LIstItem items={this.state.data}/>
+            <Grid>
+                <ListItem
+                    items={this.state.data}
+                    addRow={this.handleAddRow}
+                />
+                <NewRow
+                    addRow={this.state.addRow}
+                    closeAddRow={this.handleCloseAddRow}
+                />
+            </Grid>
         );
     }
 
