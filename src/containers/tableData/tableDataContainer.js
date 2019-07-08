@@ -43,25 +43,28 @@ export default class TableDataContainer extends React.Component {
             console.log(data);
             data.map((item, index) => {
                 if (index === id - 1) {
-                    if(this.state.newAlias !== ""){
+                    if (this.state.newAlias !== "") {
                         item.alias = this.state.newAlias;
-                    }
-                    else if(this.state.newLink!==""){
+                    } else if (this.state.newLink !== "") {
                         item.link = this.state.newLink;
                     }
-                }
-                else{
+                } else {
                     return item
                 }
-                console.log(item);
-                console.log(this.state);
             })
-        }, ()=>this.setState({newAlias: "", newLink: ""}));
-
-
-
+        }, () => this.setState({newAlias: "", newLink: ""}));
         this.handleCancelationEdit();
+    };
 
+    handleRemoveItem = id => {
+        this.setState(({data}) => {
+            const idx = data.findIndex((item) => item.id === id);
+            const before = data.slice(0, idx);
+            const after = data.slice(idx + 1);
+            const newData = [...before, ...after];
+
+            return {data: newData}
+        })
     };
 
     isEditable = id => {
@@ -76,7 +79,6 @@ export default class TableDataContainer extends React.Component {
     };
 
     handleInput = name => event => {
-        // const value = event.target.value;
         this.setState({[name]: event.target.value})
     };
 
@@ -124,6 +126,7 @@ export default class TableDataContainer extends React.Component {
                     handleCancelation={this.handleCancelationEdit}
                     handleChange={this.handleInput}
                     handleDone={this.handleDoneEdit}
+                    handleRemove={this.handleRemoveItem}
 
                 />
                 <NewRow

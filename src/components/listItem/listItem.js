@@ -81,7 +81,11 @@ const ListItemData = props => {
                                         </IconButton>
                                     </div>
                                     <div hidden={props.editable(row.id)}>
-                                        <IconButton edge="end" aria-label="Delete">
+                                        <IconButton
+                                            edge="end"
+                                            aria-label="Delete"
+                                        onClick={()=>props.handleRemove(row.id)}
+                                        >
                                             <DeleteIcon/>
                                         </IconButton>
                                     </div>
