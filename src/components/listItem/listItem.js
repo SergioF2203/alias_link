@@ -88,7 +88,7 @@ const ListItemData = props => {
                                             edge="end"
                                             aria-label="Cancel"
                                             // style={{marginRight: 2}}
-                                            // onClick={()=>props.handleEdit(row.id)}
+                                            onClick={props.handleCancelation}
                                         >
                                             <CancelIcon/>
                                         </IconButton>

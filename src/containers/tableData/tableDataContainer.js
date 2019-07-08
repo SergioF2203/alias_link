@@ -69,9 +69,9 @@ export default class TableDataContainer extends React.Component {
 
     };
 
-    clearAll() {
-        localStorage.clear();
-    }
+    clearAll = () => {
+        this.setState({data:[]});
+    };
 
     handleCloseAddRow = () => {
         this.setState({
@@ -80,6 +80,10 @@ export default class TableDataContainer extends React.Component {
             newLink: ""
         })
     };
+
+    handleCancelationEdit = () => {
+        this.setState({id: null})
+    }
 
     render() {
         return (
@@ -90,6 +94,7 @@ export default class TableDataContainer extends React.Component {
                     clearAll={this.clearAll}
                     handleEdit={this.handleEdit}
                     editable={this.isEditable}
+                    handleCancelation={this.handleCancelationEdit}
                 />
                 <NewRow
                     addRow={this.state.addRow}
