@@ -15,6 +15,7 @@ import LinkIcon from '@material-ui/icons/Link';
 import {TextField} from "@material-ui/core";
 import DoneIcon from '@material-ui/icons/Done'
 import CancelIcon from '@material-ui/icons/Cancel';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const ListItemData = props => {
     return (
@@ -23,18 +24,22 @@ const ListItemData = props => {
             <Typography variant="h6" style={{margin: 4}}>
                 List alias of link
             </Typography>
-            <IconButton edge="end" aria-label="Add">
-                <AddIcon onClick={props.addRow}/>
-            </IconButton>
-            <IconButton edge="end" aria-label="Clear" style={{marginLeft: 20}}>
-                <DeleteIcon onClick={props.clearAll}/>
-            </IconButton>
+            <Tooltip title="Add Item">
+                <IconButton edge="end" aria-label="Add">
+                    <AddIcon onClick={props.addRow}/>
+                </IconButton>
+            </Tooltip>
+            <Tooltip title="Delete All">
+                <IconButton edge="end" aria-label="Clear" style={{marginLeft: 20}}>
+                    <DeleteIcon onClick={props.clearAll}/>
+                </IconButton>
+            </Tooltip>
             <Grid container justify='center' alignItems='center'>
-            <Typography
-                variant="button"
-                hidden={props.isEmpty}>
-                No data to show
-            </Typography>
+                <Typography
+                    variant="button"
+                    hidden={props.isEmpty}>
+                    No data to show
+                </Typography>
             </Grid>
             <div>
                 <List>
@@ -81,7 +86,7 @@ const ListItemData = props => {
                                             edge="end"
                                             aria-label="Done"
                                             style={{marginRight: 2}}
-                                            onClick={()=>props.handleDone(row.id)}
+                                            onClick={() => props.handleDone(row.id)}
                                         >
                                             <DoneIcon/>
                                         </IconButton>
@@ -90,7 +95,7 @@ const ListItemData = props => {
                                         <IconButton
                                             edge="end"
                                             aria-label="Delete"
-                                        onClick={()=>props.handleRemove(row.id)}
+                                            onClick={() => props.handleRemove(row.id)}
                                         >
                                             <DeleteIcon/>
                                         </IconButton>
