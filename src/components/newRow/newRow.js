@@ -38,9 +38,10 @@ const NewRow = (props) => {
                         style={{marginLeft: 15}}
                         id="link"
                         label="Link"
+                        // placeholder={props.clearField}
                         // onChange={props.handleChange('newLink')}
                         // className={classes.textField}
-                        // value=""
+
                         onChange={props.handleChange('newLink')}
                         margin="normal"
                     />
