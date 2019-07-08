@@ -21,6 +21,7 @@ import CancelIcon from '@material-ui/icons/Cancel';
 const ListItemData = props => {
     return (
         <Grid item xs={12} md={6}>
+
             <Typography variant="h6" style={{margin: 4}}>
                 List alias of link
             </Typography>
@@ -30,6 +31,14 @@ const ListItemData = props => {
             <IconButton edge="end" aria-label="Clear" style={{marginLeft: 20}}>
                 <DeleteIcon onClick={props.clearAll}/>
             </IconButton>
+            <Grid container justify='center' alignItems='center'>
+            <Typography
+                variant="button"
+                // display="block"
+                hidden={props.isEmpty}>
+                No data to view
+            </Typography>
+            </Grid>
             <div>
                 <List>
                     {props.items.map(row => (

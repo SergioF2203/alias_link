@@ -10,6 +10,7 @@ export default class TableDataContainer extends React.Component {
 
     state = {
         addRow: true,
+        isEmpty: true,
         data: [
             {
                 id: 1,
@@ -62,9 +63,16 @@ export default class TableDataContainer extends React.Component {
             const before = data.slice(0, idx);
             const after = data.slice(idx + 1);
             const newData = [...before, ...after];
+            console.log(newData)
+
+            if(newData.length === 0){
+                this.setState({isEmpty: false})
+            }
 
             return {data: newData}
-        })
+        });
+
+
     };
 
     isEditable = id => {
@@ -99,7 +107,7 @@ export default class TableDataContainer extends React.Component {
     };
 
     clearAll = () => {
-        this.setState({data: []});
+        this.setState({data: [], isEmpty: false});
     };
 
     handleCloseAddRow = () => {
@@ -127,6 +135,7 @@ export default class TableDataContainer extends React.Component {
                     handleChange={this.handleInput}
                     handleDone={this.handleDoneEdit}
                     handleRemove={this.handleRemoveItem}
+                    isEmpty={this.state.isEmpty}
 
                 />
                 <NewRow
