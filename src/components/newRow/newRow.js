@@ -27,7 +27,7 @@ const NewRow = (props) => {
                         id="alias"
                         label="Alias"
                         // className={classes.textField}
-                        value=""
+                        onChange={props.handleChange('newAlias')}
                         // onChange={handleChange('name')}
                         margin="normal"
                     />
@@ -38,9 +38,10 @@ const NewRow = (props) => {
                         style={{marginLeft: 15}}
                         id="link"
                         label="Link"
+                        // onChange={props.handleChange('newLink')}
                         // className={classes.textField}
-                        value=""
-                        // onChange={handleChange('name')}
+                        // value=""
+                        onChange={props.handleChange('newLink')}
                         margin="normal"
                     />
                 </Grid>
@@ -49,7 +50,7 @@ const NewRow = (props) => {
                         <CancelIcon onClick={props.closeAddRow}/>
                     </IconButton>
                     <IconButton edge="end" aria-label="Delete">
-                        <DoneIcon onClick={props.closeAddRow}/>
+                        <DoneIcon onClick={props.addItem}/>
                     </IconButton>
                 </Grid>
             </Grid>

@@ -21,7 +21,9 @@ export default class TableDataContainer extends React.Component {
                 alias: "hbr",
                 link: "habr.com"
             }
-        ]
+        ],
+        newAlias: "",
+        newLink: ""
 
     };
 
@@ -30,9 +32,33 @@ export default class TableDataContainer extends React.Component {
 
     };
 
+    handleInput = name => event => {
+        // const value = event.target.value;
+        this.setState({[name]: event.target.value})
+    };
+
+    handleAddItem = () => {
+
+        this.setState(prevState => ({
+            data: [
+                ...prevState.data,
+                {
+                    alias: this.state.newAlias,
+                    link: this.state.newLink
+                }
+            ]
+        }))
+        this.handleCloseAddRow();
+
+    };
+
+    updateArray(newItem) {
+        this.setState(prevState => ({data: [...prevState.data, newItem]}))
+    }
+
     handleCloseAddRow = () => {
         this.setState({addRow: true})
-    }
+    };
 
     render() {
         return (
@@ -44,6 +70,8 @@ export default class TableDataContainer extends React.Component {
                 <NewRow
                     addRow={this.state.addRow}
                     closeAddRow={this.handleCloseAddRow}
+                    addItem={this.handleAddItem}
+                    handleChange={this.handleInput}
                 />
             </Grid>
         );
