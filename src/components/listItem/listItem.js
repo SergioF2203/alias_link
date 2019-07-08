@@ -34,9 +34,8 @@ const ListItemData = props => {
             <Grid container justify='center' alignItems='center'>
             <Typography
                 variant="button"
-                // display="block"
                 hidden={props.isEmpty}>
-                No data to view
+                No data to show
             </Typography>
             </Grid>
             <div>

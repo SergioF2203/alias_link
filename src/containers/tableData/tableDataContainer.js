@@ -102,6 +102,7 @@ export default class TableDataContainer extends React.Component {
                 }
             ]
         }));
+        this.setState({isEmpty: true})
         this.handleCloseAddRow()
 
     };
