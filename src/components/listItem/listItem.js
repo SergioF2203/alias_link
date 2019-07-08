@@ -16,8 +16,6 @@ import {TextField} from "@material-ui/core";
 import DoneIcon from '@material-ui/icons/Done'
 import CancelIcon from '@material-ui/icons/Cancel';
 
-
-
 const ListItemData = props => {
     return (
         <Grid item xs={12} md={6}>

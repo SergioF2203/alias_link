@@ -2,8 +2,6 @@ import React from 'react';
 import ListItem from '../../components/listItem';
 import NewRow from '../../components/newRow';
 import {Grid} from "@material-ui/core";
-// import Redirect from '../../components/redirect';
-import {Redirect} from 'react-router-dom';
 
 
 export default class TableDataContainer extends React.Component {
@@ -15,23 +13,7 @@ export default class TableDataContainer extends React.Component {
     state = {
         addRow: true,
         isEmpty: true,
-        data: [
-            // {
-            //     id: 1,
-            //     alias: "goo",
-            //     link: "https://google.com.ua"
-            // },
-            // {
-            //     id: 2,
-            //     alias: "stcowfl",
-            //     link: "http://stackowerflow.com"
-            // },
-            // {
-            //     id: 3,
-            //     alias: "hbr",
-            //     link: "http://habr.com"
-            // }
-        ],
+        data: [],
         newAlias: "",
         newLink: "",
         id: null,
@@ -66,27 +48,22 @@ export default class TableDataContainer extends React.Component {
             )
         }
 
-        this.setState({data: data});
+        this.setState({data: data}, () => this.findLink());
 
-        if(data.length===0){
+        if (data.length === 0) {
             this.setState({isEmpty: false})
         }
+    };
 
+    findLink = () => {
         const alias = (this.props.location.pathname).substr(1);
 
-        console.log((this.props.location.pathname).substr(1));
-        console.log(alias);
-
         this.state.data.map((item) => {
-            console.log(item);
-
             if (item.alias === alias) {
                 window.location.href = item.link;
                 this.setState({path: item.link})
             }
         });
-        console.log(this.state);
-        console.log(this.props)
     };
 
     componentWillUnmount() {
@@ -99,18 +76,23 @@ export default class TableDataContainer extends React.Component {
 
     handleDoneEdit = id => {
         this.setState(({data}) => {
-            data.map((item, index) => {
-                if (index === id - 1) {
+            data.map((item) => {
+                if (item.id === id) {
+                    console.log(item);
+                    console.log(this.state.newLink);
                     if (this.state.newAlias !== "") {
                         item.alias = this.state.newAlias;
-                    } else if (this.state.newLink !== "") {
+                    }
+                    if (this.state.newLink !== "") {
                         item.link = this.state.newLink;
                     }
                 } else {
                     return item
                 }
+                console.log(this.state);
+
             })
-        }, () => this.setState({newAlias: "", newLink: ""}));
+        }, () => this.setState({newAlias: "", newLink: ""}, ()=>this.updateLocalstorage()));
         this.handleCancelationEdit();
     };
 
@@ -127,12 +109,14 @@ export default class TableDataContainer extends React.Component {
             }
 
             return {data: newData}
-        },()=>{
-            window.localStorage.clear();
-            this.state.data.map((item) => {
-                const linkObj = {alias: item.alias, link: item.link}
-                window.localStorage.setItem(item.id, JSON.stringify({linkObj}))
-            });
+        }, () => this.updateLocalstorage());
+    };
+
+    updateLocalstorage = () => {
+        window.localStorage.clear();
+        this.state.data.map((item) => {
+            const linkObj = {alias: item.alias, link: item.link};
+            window.localStorage.setItem(item.id, JSON.stringify({linkObj}))
         });
     };
 
@@ -191,7 +175,6 @@ export default class TableDataContainer extends React.Component {
     render() {
         return (
             <Grid>
-                {/*<Redirect to={this.state.path}/>*/}
                 <ListItem
                     items={this.state.data}
                     addRow={this.handleAddRow}
@@ -211,10 +194,6 @@ export default class TableDataContainer extends React.Component {
                     addItem={this.handleAddItem}
                     handleChange={this.handleInput}
                 />
-                {/*<Redirect*/}
-                {/*    data={this.state.data}*/}
-                {/*    path={this.path}*/}
-                {/*/>*/}
             </Grid>
         );
     }
