@@ -47,12 +47,15 @@ const ListItemData = props => {
                                 <TextField
                                     label={row.alias}
                                     style={{marginBottom: 25}}
+                                    onChange={props.handleChange('newAlias')}
                                 />
                             </div>
                             <div hidden={!props.editable(row.id)}>
                                 <TextField
                                     label={row.link}
                                     style={{marginBottom: 25, marginLeft: 5}}
+                                    onChange={props.handleChange('newLink')}
+
                                 />
                             </div>
                             <ListItemSecondaryAction>
@@ -72,7 +75,7 @@ const ListItemData = props => {
                                             edge="end"
                                             aria-label="Done"
                                             style={{marginRight: 2}}
-                                            // onClick={()=>props.handleEdit(row.id)}
+                                            onClick={()=>props.handleDone(row.id)}
                                         >
                                             <DoneIcon/>
                                         </IconButton>
@@ -84,10 +87,8 @@ const ListItemData = props => {
                                     </div>
                                     <div hidden={!props.editable(row.id)}>
                                         <IconButton
-
                                             edge="end"
                                             aria-label="Cancel"
-                                            // style={{marginRight: 2}}
                                             onClick={props.handleCancelation}
                                         >
                                             <CancelIcon/>

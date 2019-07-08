@@ -26,9 +26,7 @@ const NewRow = (props) => {
                         fullWidth
                         id="alias"
                         label="Alias"
-                        // className={classes.textField}
                         onChange={props.handleChange('newAlias')}
-                        // onChange={handleChange('name')}
                         margin="normal"
                     />
                 </Grid>
@@ -38,10 +36,6 @@ const NewRow = (props) => {
                         style={{marginLeft: 15}}
                         id="link"
                         label="Link"
-                        // placeholder={props.clearField}
-                        // onChange={props.handleChange('newLink')}
-                        // className={classes.textField}
-
                         onChange={props.handleChange('newLink')}
                         margin="normal"
                     />

@@ -37,6 +37,33 @@ export default class TableDataContainer extends React.Component {
         this.setState({id: id})
     };
 
+    handleDoneEdit = id => {
+        console.log(id);
+        this.setState(({data}) => {
+            console.log(data);
+            data.map((item, index) => {
+                if (index === id - 1) {
+                    if(this.state.newAlias !== ""){
+                        item.alias = this.state.newAlias;
+                    }
+                    else if(this.state.newLink!==""){
+                        item.link = this.state.newLink;
+                    }
+                }
+                else{
+                    return item
+                }
+                console.log(item);
+                console.log(this.state);
+            })
+        }, ()=>this.setState({newAlias: "", newLink: ""}));
+
+
+
+        this.handleCancelationEdit();
+
+    };
+
     isEditable = id => {
         if (id === this.state.id) {
             return true
@@ -70,7 +97,7 @@ export default class TableDataContainer extends React.Component {
     };
 
     clearAll = () => {
-        this.setState({data:[]});
+        this.setState({data: []});
     };
 
     handleCloseAddRow = () => {
@@ -83,7 +110,7 @@ export default class TableDataContainer extends React.Component {
 
     handleCancelationEdit = () => {
         this.setState({id: null})
-    }
+    };
 
     render() {
         return (
@@ -95,6 +122,9 @@ export default class TableDataContainer extends React.Component {
                     handleEdit={this.handleEdit}
                     editable={this.isEditable}
                     handleCancelation={this.handleCancelationEdit}
+                    handleChange={this.handleInput}
+                    handleDone={this.handleDoneEdit}
+
                 />
                 <NewRow
                     addRow={this.state.addRow}
